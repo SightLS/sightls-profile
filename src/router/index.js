@@ -15,6 +15,23 @@ const routes = [
     component: () => import(/* webpackChunkName: "checkers" */'../views/InfoCheckersView.vue')
   },
   {
+    path: '/expenses',
+    name: 'expenses',
+    component: () => import(/* webpackChunkName: "expenses" */'../views/ExpensesView.vue'),
+    children: [
+      {
+        path: '/expenses/main',
+        name: 'expenses-main',
+        component: () => import(/* webpackChunkName: "expensesMain" */'../../src/views/expensesPages/ExpensesMain')
+      },
+      {
+        path: '/expenses/about-expenses',
+        name: 'about-expenses',
+        component: () => import(/* webpackChunkName: "about-expenses" */'../../src/views/expensesPages/AboutExpenses')
+      }
+    ]
+  },
+  {
     path: '/not-found',
     name: 'NotFound',
     component: () => import(/* webpackChunkName: "NotFound" */'../../src/views/NotFound.vue')

@@ -70,6 +70,6 @@ a {
   margin: 0 auto;
 }
 .content{
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 260px);
 }
 </style>

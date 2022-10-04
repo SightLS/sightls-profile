@@ -18,7 +18,7 @@
           </button>
           <img class="arrow" src="../../assets/arrow-copy.png" alt="">
         </div>
-        <p class="contacts__link">{{ mail }}</p>
+        <a href="mailto:sightlesssf46@gmail.com" class="contacts__link">{{ mail }}</a>
       </div>
     </div>
   </section>
