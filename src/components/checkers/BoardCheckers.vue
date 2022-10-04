@@ -25,13 +25,19 @@
 </template>
 
 <script>
+import { Howl } from 'howler'
 
 export default {
   name: 'BoardCheckers',
   data: () => ({
     rows: [1, 2, 3, 4, 5, 6, 7, 8].reverse(),
     columns: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'],
-    flag: 'ход белых'
+    flag: 'ход белых',
+    sounds: {
+      move: new Howl({
+        src: require('@/assets/sounds/tik.mp3')
+      })
+    }
   }),
   methods: {
     getClass (col, row, indexCol) {
@@ -94,38 +100,47 @@ export default {
         }
       }
       if (e.classList.contains('damka-white') || e.classList.contains('damka-black')) {
-        let id
-        let getId
         let a = id0
         let b = id1
         for (let i = 0; i < 4; i++) {
           if (i === 0) {
-            damkaMove(a, b)
+            this.damkaMove(a, b)
           } else if (i === 1) {
             a = -a
-            damkaMove(a, b)
+            this.damkaMove(a, b)
           } else if (i === 2) {
             b = -b
-            damkaMove(a, b)
+            this.damkaMove(a, b)
           } else {
             a = -a
-            damkaMove(a, b)
+            this.damkaMove(a, b)
           }
         }
-
-        function damkaMove (id0, id1) {
-          let counter = 1
-          while (counter <= 8) {
-            id = String.fromCodePoint(Math.abs(id0 + counter)) + String.fromCodePoint(Math.abs(id1 + counter))
-            getId = document.getElementById(id)
-            if (getId && !getId.children.length) {
-              getId.classList.add('dropPos')
-              counter++
-            } else {
-              break
-            }
-          }
+      }
+    },
+    damkaMove (id0, id1) {
+      let counter = 1
+      while (counter <= 8) {
+        const id = String.fromCodePoint(Math.abs(id0 + counter)) + String.fromCodePoint(Math.abs(id1 + counter))
+        const getId = document.getElementById(id)
+        if (getId && !getId.children.length) {
+          getId.classList.add('dropPos')
+          counter++
+        } else {
+          break
         }
+      }
+    },
+    checkerAttacks (id0, id1, opponent) {
+      const id = String.fromCodePoint(Math.abs(id0 + 1)) + String.fromCodePoint(Math.abs(id1 + 1))
+      const idx2 = String.fromCodePoint(Math.abs(id0 + 2)) + String.fromCodePoint(Math.abs(id1 + 2))
+      const getId = document.getElementById(id)
+      const getIdx2 = document.getElementById(idx2)
+      if (getId && getId.children.length &&
+        getId.firstChild.classList.contains(opponent) &&
+        getIdx2 && !getIdx2.children.length) {
+        getIdx2.classList.add('dropPos')
+        getId.classList.add('kill-target')
       }
     },
     attack (event) {
@@ -158,86 +173,68 @@ export default {
       const id0 = e.parentNode.id.codePointAt(0)
       const id1 = e.parentNode.id.codePointAt(1)
 
-      let id
-      let idx2
-      let getId
-      let getIdx2
       let a = id0
       let b = id1
       for (let i = 0; i < 4; i++) {
         if (i === 0) {
-          checkerAttacks(a, b)
+          this.checkerAttacks(a, b, opponent)
         } else if (i === 1) {
           a = -a
-          checkerAttacks(a, b)
+          this.checkerAttacks(a, b, opponent)
         } else if (i === 2) {
           b = -b
-          checkerAttacks(a, b)
+          this.checkerAttacks(a, b, opponent)
         } else {
           a = -a
-          checkerAttacks(a, b)
-        }
-
-        function checkerAttacks (id0, id1) {
-          id = String.fromCodePoint(Math.abs(id0 + 1)) + String.fromCodePoint(Math.abs(id1 + 1))
-          idx2 = String.fromCodePoint(Math.abs(id0 + 2)) + String.fromCodePoint(Math.abs(id1 + 2))
-          getId = document.getElementById(id)
-          getIdx2 = document.getElementById(idx2)
-          if (getId && getId.children.length &&
-            getId.firstChild.classList.contains(opponent) &&
-            getIdx2 && !getIdx2.children.length) {
-            getIdx2.classList.add('dropPos')
-            getId.classList.add('kill-target')
-          }
+          this.checkerAttacks(a, b, opponent)
         }
       }
       if (e.classList.contains('damka-white') || e.classList.contains('damka-black')) {
         for (let i = 0; i < 4; i++) {
           if (i === 0) {
-            damkaAttacks(a, b)
+            this.damkaAttacks(a, b, opponent)
           } else if (i === 1) {
             a = -a
-            damkaAttacks(a, b)
+            this.damkaAttacks(a, b, opponent)
           } else if (i === 2) {
             b = -b
-            damkaAttacks(a, b)
+            this.damkaAttacks(a, b, opponent)
           } else {
             a = -a
-            damkaAttacks(a, b)
+            this.damkaAttacks(a, b, opponent)
           }
         }
-
-        function damkaAttacks (id0, id1) {
-          let counter = 1
-          while (counter <= 8) {
-            id = String.fromCodePoint(Math.abs(id0 + counter)) + String.fromCodePoint(Math.abs(id1 + counter))
+      }
+    },
+    damkaAttacks (id0, id1, opponent) {
+      let counter = 1
+      while (counter <= 8) {
+        const id = String.fromCodePoint(Math.abs(id0 + counter)) + String.fromCodePoint(Math.abs(id1 + counter))
+        let idx2 = String.fromCodePoint(Math.abs(id0 + counter + 1)) + String.fromCodePoint(Math.abs(id1 + counter + 1))
+        const getId = document.getElementById(id)
+        let getIdx2 = document.getElementById(idx2)
+        if (getId && getId.children.length &&
+          getId.firstChild.classList.contains(opponent) &&
+          getIdx2 && !getIdx2.children.length) {
+          getIdx2.classList.add('dropPos')
+          getId.classList.add('kill-target')
+          counter++
+          while (counter <= 5) {
             idx2 = String.fromCodePoint(Math.abs(id0 + counter + 1)) + String.fromCodePoint(Math.abs(id1 + counter + 1))
-            getId = document.getElementById(id)
             getIdx2 = document.getElementById(idx2)
-            if (getId && getId.children.length &&
-              getId.firstChild.classList.contains(opponent) &&
-              getIdx2 && !getIdx2.children.length) {
+            if (getIdx2 && !getIdx2.children.length) {
               getIdx2.classList.add('dropPos')
-              getId.classList.add('kill-target')
-              counter++
-              while (counter <= 5) {
-                idx2 = String.fromCodePoint(Math.abs(id0 + counter + 1)) + String.fromCodePoint(Math.abs(id1 + counter + 1))
-                getIdx2 = document.getElementById(idx2)
-                if (getIdx2 && !getIdx2.children.length) {
-                  getIdx2.classList.add('dropPos')
-                  counter++
-                } else {
-                  break
-                }
-              }
-              break
-            } else if (getId && !getId.children.length) {
               counter++
             } else {
-              counter = 1
               break
             }
           }
+          break
+        } else if (getId && !getId.children.length) {
+          counter++
+        } else {
+          counter = 1
+          break
         }
       }
     },
@@ -250,6 +247,7 @@ export default {
       let getIdx2
 
       function checkItems (elem) {
+        //  Позже выкину в отдельый метод
         const id0 = elem.parentNode.id.codePointAt(0)
         const id1 = elem.parentNode.id.codePointAt(1)
         let a = id0
@@ -278,6 +276,7 @@ export default {
         }
 
         function checkForNextMove (id0, id1) {
+          //  Позже выкину в отдельый метод
           let counter = 1
           id = String.fromCodePoint(Math.abs(id0 + counter)) + String.fromCodePoint(Math.abs(id1 + counter))
           idx2 = String.fromCodePoint(Math.abs(id0 + counter + 1)) + String.fromCodePoint(Math.abs(id1 + counter + 1))
@@ -319,11 +318,9 @@ export default {
         check = checkers.some(checkItems)
         if (check === true) {
           this.rotateWHite()
-          // this.$el.querySelector('.board').style.transform = 'rotate(180deg)'
           this.flag = 'удар черных'
         } else {
           this.rotateWHite()
-          // this.$el.querySelector('.board').style.transform = 'rotate(180deg)'
           this.flag = 'ход черных'
         }
       }
@@ -418,6 +415,7 @@ export default {
         document.querySelectorAll('.dropPos').forEach((e) => {
           e.classList.remove('dropPos')
         })
+        this.sounds.move.play()
         if (this.flag === 'ход белых') {
           this.flag = 'белые совершили ход'
         }
@@ -476,6 +474,7 @@ export default {
       }
 
       function findKillTarget (id0, id1) {
+        //  Позже выкину в отдельый метод
         let counter = 1
         const idTake = document.querySelector('.take').id
         let id
@@ -523,7 +522,7 @@ export default {
     const treeWalker = document.createTreeWalker(document, NodeFilter.SHOW_COMMENT, null, false)
     const nodeList = []
     while (treeWalker.nextNode()) nodeList.push(treeWalker.currentNode)
-    nodeList.forEach(function (a) {
+    nodeList.forEach((a) => {
       a.parentNode.removeChild(a)
     })
   }

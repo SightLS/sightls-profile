@@ -20,11 +20,31 @@ export default {
 }
 </script>
 <style lang="scss">
-* {
-  padding: 0;
-  margin: 0 auto;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-
+ul[class],
+ol[class] {
+  padding: 0;
+}
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
 #app {
   overflow: hidden;
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -43,15 +63,13 @@ h1 {
 a {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   color: aliceblue;
+  text-decoration: none;
 }
 .container {
   width: 1250px;
-}
-html,
-body {
-  height: 100%;
+  margin: 0 auto;
 }
 .content{
-  min-height: calc(100vh - 415px);
+  min-height: calc(100vh - 100px);
 }
 </style>

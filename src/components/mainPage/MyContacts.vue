@@ -42,6 +42,7 @@ export default {
 h1 {
   margin-bottom: 160px;
 }
+
 button {
   position: relative;
   bottom: 15px;
@@ -50,37 +51,45 @@ button {
   color: inherit;
   background-color: transparent;
 }
+
 .logo__container {
   display: flex;
   flex-direction: row;
 }
-.contacts__list{
+
+.contacts__list {
   display: flex;
   justify-content: space-around;
 }
+
 .contacts {
   height: 60vh;
 
   &__list {
     display: flex;
   }
-  &__link{
+
+  &__link {
     width: 100%;
-    position: relative;
-    left: 73px;
   }
 }
 
 .logo {
   width: 70px;
 }
-.logo:hover{
+
+.logo:hover {
   width: 80px;
   cursor: pointer;
 }
-.logo:active{
+
+.logo:active {
   width: 75px;
 }
+section{
+  margin-bottom: 100px;
+}
+
 .arrow {
   position: relative;
   bottom: 20px;

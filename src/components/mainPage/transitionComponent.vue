@@ -1,26 +1,38 @@
 <template>
-<div class="animated_block">
-  <div class="block_poduglom">
-    <div class="text-top">
-      SightLS sights SightLS sight SightLS sight SightLS sight SightLS sight SightLS sight SightLS sight SightLS sight
-      SightLS sights SightLS sight SightLS sight SightLS sight SightLS sight
-      SightLS sights SightLS sight SightLS sight SightLS sight SightLS sight SightLS sight SightLS sight SightLS sight
-      SightLS sights SightLS sight SightLS sight SightLS sight SightLS sight
-      SightLS sights SightLS sight SightLS sight SightLS sight SightLS
+  <div class="animated_block">
+    <div class="block_poduglom">
+      <div class="text-top">
+        {{ bannerSightLSUp }}
+      </div>
+    </div>
+    <div class="block_poduglom2">
+      <div class="text-bottom">
+          {{ bannerSightLSDown }}
+      </div>
     </div>
   </div>
-  <div class="block_poduglom2">
-    <div class="text-bottom">
-      SightLS sights SightLS sight SightLS sight SightLS sight SightLS sight SightLS sight SightLS sight SightLS sight
-      SightLS sights SightLS sight SightLS sight SightLS sight SightLS sight
-    </div>
-  </div>
-</div>
 </template>
 
 <script>
 export default {
-  name: 'transitionComponent'
+  name: 'transitionComponent',
+  methods: {},
+  computed: {
+    bannerSightLSUp () {
+      const banner = []
+      for (let i = 0; i < 51; i++) {
+        banner.push('SightLS')
+      }
+      return banner.join(' ')
+    },
+    bannerSightLSDown () {
+      const banner = []
+      for (let i = 0; i < 21; i++) {
+        banner.push('SightLS')
+      }
+      return banner.join(' ')
+    }
+  }
 }
 </script>
 
@@ -33,21 +45,25 @@ export default {
   transform: skewY(-1.3deg);
   background-color: rgb(255, 46, 65);
 }
-.block_poduglom2{
+
+.block_poduglom2 {
   @extend .block_poduglom;
   background-color: #131313;
 }
-.animated_block{
+
+.animated_block {
   width: 4100px;
   margin-left: 0px;
 }
+
 .text-top {
   position: relative;
   animation: floatingText 100s linear infinite;
   font-size: 21px;
   color: aliceblue;
 }
-.text-bottom{
+
+.text-bottom {
   padding-top: 10px;
   color: aliceblue;
   position: relative;
@@ -57,13 +73,13 @@ export default {
 
 @keyframes floatingText {
   0% {
-    margin-left: 0;
+    margin-left: -100px;
   }
   50% {
     margin-left: -2000px;
   }
-  100%{
-    margin-left: 0;
+  100% {
+    margin-left: -100px;
   }
 }
 

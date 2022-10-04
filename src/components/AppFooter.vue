@@ -1,9 +1,7 @@
 <template>
   <footer>
     <div class="container">
-      <span>копирайт</span>
-      <div>еще 1 нав бар</div>
-      <div>контакты</div>
+      <span>©Все права чет там)</span>
     </div>
   </footer>
 </template>
@@ -17,7 +15,7 @@ export default {
 <style scoped lang="scss">
 
 footer{
-  height: 300px;
+  height: 100px;
   background-color: rgb(255, 46, 65);
 }
 

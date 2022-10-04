@@ -9,8 +9,15 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "howler": "^2.2.3",
+    "mutationobserver-shim": "^0.3.7",
+    "popper.js": "^1.16.1",
+    "portal-vue": "^2.1.7",
     "vue": "^2.6.14",
+    "vue-agile": "^2.0.0",
+    "vue-resource": "^1.5.3",
     "vue-router": "^3.5.1",
+    "vue-yandex-maps": "^1.0.4",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
@@ -26,7 +33,6 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-vue": "^8.0.3",
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
     "vue-template-compiler": "^2.6.14"

@@ -2,16 +2,16 @@
   <header>
     <div class="container header">
       <div class="logo-container">
-        <a>
+        <router-link to="/">
           <img src="../assets/sightls-logo.png" alt="SightLS" class="logo-sightls">
-        </a>
+        </router-link>
       </div>
-      <div class="primary-links">
+      <nav class="primary-links">
         <router-link @click.native="scrollToAbout" to="/">Обо мне</router-link>
         <router-link @click.native="scrollToProject" to="/">Проекты</router-link>
         <router-link @click.native="scrollToContacts" to="/">Контакты</router-link>
-      </div>
-      <div class="secondary-links">
+      </nav>
+      <nav class="secondary-links">
         <a href="https://github.com/SightLS" target="_blank">
           <img class="logo" src="../assets/GitHub-logo.png" alt="GitHub">
         </a>
@@ -24,7 +24,7 @@
         <a href="https://discordapp.com/users/363734265239961602/" target="_blank">
           <img class="logo" src="../assets/Discord-Logo-White.png" alt="Discord">
         </a>
-      </div>
+      </nav>
     </div>
   </header>
 </template>
@@ -87,11 +87,11 @@ header {
   display: flex;
   gap: 10px;
   width: 300px;
-  margin-right: 0;
 }
 
 .secondary-links {
-  @extend .primary-links
+  @extend .primary-links;
+  gap: 40px;
 }
 
 .logo {

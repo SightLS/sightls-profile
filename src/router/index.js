@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 Vue.use(VueRouter)
 
@@ -8,17 +7,23 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/checkers',
-    name: 'checkers',
-    component: () => import('../views/AppCheckers.vue')
+    component: () => import(/* webpackChunkName: "homePage" */'../views/HomeView.vue')
   },
   {
     path: '/checkers-info',
     name: 'checkers-info',
-    component: () => import('../views/InfoCheckersView.vue')
+    component: () => import(/* webpackChunkName: "checkers" */'../views/InfoCheckersView.vue')
+  },
+  {
+    path: '/not-found',
+    name: 'NotFound',
+    component: () => import(/* webpackChunkName: "NotFound" */'../../src/views/NotFound.vue')
+  },
+  {
+    path: '*',
+    redirect: {
+      name: 'NotFound'
+    }
   }
 ]
 
