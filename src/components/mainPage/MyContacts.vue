@@ -103,4 +103,21 @@ section{
   flex-direction: column;
   gap: 20px;
 }
+@media (max-width: 420px) {
+  .arrow {
+    display: none;
+  }
+  .contacts {
+    height: 60vh;
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+  }
+  button {
+    bottom: 0;
+  }
+}
 </style>

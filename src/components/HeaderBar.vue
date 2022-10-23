@@ -97,5 +97,33 @@ header {
 .logo {
   max-width: 40px;
 }
+@media (max-width: 420px) {
+  header {
+    margin-bottom: 40px;
+    display: flex;
+    height: 115px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 46, 65);
+  }
+
+  .logo-sightls {
+display: none;
+  }
+
+  .primary-links {
+    display: flex;
+    gap: 10px;
+    width: 300px;
+  }
+
+  .secondary-links {
+    display: none;
+  }
+
+  .logo {
+    max-width: 40px;
+  }
+}
 
 </style>
