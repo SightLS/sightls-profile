@@ -63,5 +63,21 @@ export default {
 img {
   height: 100%;
 }
+@media (max-width: 420px) {
+  img {
+    height: 100%;
+  }
+  .projects__item {
+    background-color: rgba(255, 46, 65, 0.7);
+    transform: skewY(-1.7deg);
+    height: 140px;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  }
+}
 
 </style>
