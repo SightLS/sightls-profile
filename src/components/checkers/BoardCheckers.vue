@@ -615,5 +615,15 @@ export default {
   @extend .checker-black;
   background-color: blue;
 }
+@media (max-width: 420px) {
+  .board__square {
+    width: 50px;
+    height: 50px;
+  }
+  .checker-black {
+    width: 42px;
+    height: 42px;
+  }
+}
 
 </style>

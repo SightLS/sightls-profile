@@ -72,4 +72,10 @@ a {
 .content{
   min-height: calc(100vh - 260px);
 }
+@media (max-width: 420px) {
+  .container {
+    width: 400px;
+    margin: 0 auto;
+  }
+}
 </style>

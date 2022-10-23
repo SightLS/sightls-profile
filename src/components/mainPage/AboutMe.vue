@@ -32,7 +32,7 @@
               <div class="stack">
                 <h4>Применение стека технологий/Цифровые навыки:</h4><br><br>
                 <ul>
-                  <li>vue</li>
+                  <li>Vue</li>
                   <li>Vuex Vue-router</li>
                   <li>HTML5 CSS3</li>
                   <li>Scss Sass</li>
@@ -40,6 +40,7 @@
                   <li>Bootstrap</li>
                   <li>Git</li>
                   <li>БЭМ</li>
+                  <li>Vuetify</li>
                 </ul>
               </div>
             </div>
@@ -229,5 +230,15 @@ section {
 
 h4 {
   margin-bottom: -20px;
+}
+@media (max-width: 420px) {
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .about{
+    height: 950px;
+  }
 }
 </style>
