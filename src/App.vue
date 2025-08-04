@@ -4,6 +4,7 @@
     <header-bar />
     
     <main class="app-content">
+      <chat />
       <router-view />
     </main>
     
@@ -17,7 +18,8 @@ export default {
   components: {
     HeaderBar: () => import('@/components/HeaderBar'),
     AppFooter: () => import('@/components/AppFooter'),
-    MouseTrail: () => import('@/components/MouseTrail')
+    MouseTrail: () => import('@/components/MouseTrail'),
+    Chat: () => import('@/components/chat/Chat'),
   }
 }
 </script>
