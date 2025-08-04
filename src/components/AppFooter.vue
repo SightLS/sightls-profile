@@ -1,21 +1,21 @@
 <template>
-  <footer>
+  <footer class="app-footer">
     <div class="container">
-      <nav class="secondary-links">
-        <a href="https://github.com/SightLS" target="_blank">
+      <nav class="social-links">
+        <a href="https://github.com/SightLS" target="_blank" rel="noopener">
           <img class="logo" src="../assets/GitHub-logo.png" alt="GitHub">
         </a>
-        <a href="https://t.me/SightLS" target="_blank">
+        <a href="https://t.me/SightLS" target="_blank" rel="noopener">
           <img class="logo" src="../assets/telegram.png" alt="Telegram">
         </a>
-        <a href="https://vk.com/sightls" target="_blank">
+        <a href="https://vk.com/sightls" target="_blank" rel="noopener">
           <img class="logo" src="../assets/VK_Logo.png" alt="VK">
         </a>
-        <a href="https://discordapp.com/users/363734265239961602/" target="_blank">
+        <a href="https://discordapp.com/users/363734265239961602/" target="_blank" rel="noopener">
           <img class="logo" src="../assets/Discord-Logo-White.png" alt="Discord">
         </a>
       </nav>
-      <span>©Все права чет там)</span>
+      <span class="copyright">© Все права чет там)</span>
     </div>
   </footer>
 </template>
@@ -27,20 +27,39 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
-footer{
+.app-footer {
   height: 105px;
   background-color: rgb(255, 46, 65);
-  nav{
+  display: flex;
+  align-items: center;
+
+  .container {
+    width: 100%;
+    text-align: center;
+  }
+
+  .social-links {
     display: flex;
-    margin-top: 20px;
     justify-content: center;
     gap: 20px;
+    margin-bottom: 10px;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo {
+      max-width: 40px;
+      height: auto;
+    }
   }
-  .logo{
-    max-width: 40px;
-    padding-top: 20px;
+
+  .copyright {
+    display: block;
+    font-size: 14px;
+    color: white;
   }
 }
-
 </style>

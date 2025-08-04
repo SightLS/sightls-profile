@@ -537,93 +537,121 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 200px;
+  margin-bottom: 100px;
 
   &__rows {
     display: flex;
-    flex-direction: row;
   }
 
   &__square {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
     width: 70px;
     height: 70px;
-    border: 1px solid purple;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
   }
 
   .black {
-    background-color: rgb(255, 46, 65);
+    background-color: #b58863;
   }
-  .white{
-    background-color: #0c0b0b;
+
+  .white {
+    background-color: #f0d9b5;
   }
+
   .dropPos {
-    background-color: purple;
+    background-color: #8fbc8f !important;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
   }
 
   .take {
-    background-color: gray;
+    background-color: #999 !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     z-index: 3;
   }
 
   .kill-target {
-    background-color: antiquewhite;
-  }
-  .damka-white {
-    border: 5px solid gold;
+    background-color: #ffaaaa !important;
+    border: 2px dashed red;
   }
 
+  .damka-white,
   .damka-black {
-    @extend .damka-white
+    border: 3px solid gold;
+    box-shadow: 0 0 6px gold;
   }
+}
+
+.checker-black,
+.checker-white {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s;
 }
 
 .checker-black {
-  border: 1px solid black;
-  background-color: black;
-  width: 55px;
-  height: 55px;
-  border-radius: 30px;
-  z-index: 100;
+  background: radial-gradient(circle at 30% 30%, #444, #000);
+  border: 1px solid #000;
 }
-.rotate-black{
-  animation-duration: 0.5s;
-  animation-name: rotateBlack;
+
+.checker-white {
+  background: radial-gradient(circle at 30% 30%, #bcd, #247);
+  border: 1px solid #123;
 }
-.rotate-white{
-  animation-duration: 0.5s;
-  animation-name: rotateWhite;
+
+.rotate-black {
+  animation: rotateBlack 0.5s forwards;
 }
+
+.rotate-white {
+  animation: rotateWhite 0.5s forwards;
+}
+
 @keyframes rotateWhite {
-  to{
+  to {
     transform: rotate(180deg);
   }
 }
+
 @keyframes rotateBlack {
-  from{
+  from {
     transform: rotate(180deg);
   }
-  to{
+  to {
     transform: rotate(0deg);
   }
 }
 
-.checker-white {
-  @extend .checker-black;
-  background-color: blue;
-}
 @media (max-width: 420px) {
   .board__square {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
   }
-  .checker-black {
-    width: 42px;
-    height: 42px;
+
+  .checker-black,
+  .checker-white {
+    width: 38px;
+    height: 38px;
   }
+}
+
+.app-checkers h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.app-checkers h2.msg {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 </style>

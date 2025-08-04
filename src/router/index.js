@@ -20,6 +20,10 @@ const routes = [
     component: () => import(/* webpackChunkName: "expenses" */'../views/ExpensesView.vue'),
     children: [
       {
+        path: '',
+        redirect: 'about-expenses'
+      },
+      {
         path: '/expenses/main',
         name: 'expenses-main',
         component: () => import(/* webpackChunkName: "expensesMain" */'../../src/views/expensesPages/ExpensesMain')

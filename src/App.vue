@@ -1,81 +1,128 @@
 <template>
-  <div id="app">
-    <HeaderBar/>
-    <div class="content">
-      <router-view/>
-    </div>
-    <AppFooter/>
+  <div class="app-layout">
+    <mouse-trail />
+    <header-bar />
+    
+    <main class="app-content">
+      <router-view />
+    </main>
+    
+    <app-footer />
   </div>
 </template>
 
 <script>
-import HeaderBar from '@/components/HeaderBar'
-import AppFooter from '@/components/AppFooter'
-
 export default {
+  name: 'AppLayout',
   components: {
-    HeaderBar,
-    AppFooter
+    HeaderBar: () => import('@/components/HeaderBar'),
+    AppFooter: () => import('@/components/AppFooter'),
+    MouseTrail: () => import('@/components/MouseTrail')
   }
 }
 </script>
+
 <style lang="scss">
+:root {
+  --bg-color: #131313;
+  --text-color: aliceblue;
+  --container-width: 1250px;
+  --mobile-container-width: 400px;
+  --content-min-height: calc(100vh - 260px);
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
-ul[class],
-ol[class] {
-  padding: 0;
+* {
+  cursor: none !important;
 }
+/* Remove default margin and padding */
 body,
-h1,
-h2,
-h3,
-h4,
+h1, h2, h3, h4,
 p,
-ul[class],
-ol[class],
+ul, ol,
 li,
 figure,
 figcaption,
 blockquote,
-dl,
-dd {
+dl, dd {
   margin: 0;
+  padding: 0;
 }
-#app {
-  overflow: hidden;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  color: aliceblue;
-  box-sizing: border-box;
-  background-color: #131313;
+
+ul[class],
+ol[class] {
+  list-style: none;
 }
-html,
-body {
+html {
   height: 100%;
+  cursor: default !important;
 }
+
+body {
+  min-height: 100%;
+  font-family: 'Avenir', 'Helvetica', 'Arial', sans-serif;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  line-height: 1.5;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-content {
+  flex: 1;
+  min-height: var(--content-min-height);
+}
+
 h1 {
-  margin-bottom: 50px;
+  margin-bottom: 3.125rem; /* 50px */
 }
 
 a {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  color: aliceblue;
+  color: inherit;
   text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+.app-footer {
+  margin-top: auto;
 }
 .container {
-  width: 1250px;
+  width: var(--container-width);
   margin: 0 auto;
+  padding: 0 1rem;
 }
-.content{
-  min-height: calc(100vh - 260px);
-}
+
 @media (max-width: 420px) {
   .container {
-    width: 400px;
-    margin: 0 auto;
+    width: var(--mobile-container-width);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 </style>
