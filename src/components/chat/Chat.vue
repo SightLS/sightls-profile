@@ -30,9 +30,6 @@
   </template>
   
   <script>
-  const API_KEY = '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';
-  import systemPrompt from './ChatPrompt.js';
-
   export default {
     data() {
       return {
@@ -52,58 +49,61 @@
           }
         });
       },
+  
       async sendMessage() {
         if (!this.input.trim()) return;
   
         const userMessage = this.input.trim();
         this.messages.push({ user: 'Вы', text: userMessage });
-        this.history.push({ role: 'user', content: userMessage });
+        this.history.push({ role: 'user', parts: [{ text: userMessage }] });
         this.input = '';
   
-        this.messages.push({ user: 'Ассистент Рамиля', text: 'печатает...' });
+        // Показать индикатор "Печатает..."
+        this.messages.push({ user: 'Ассистент', text: 'Печатает...' });
         const typingIndex = this.messages.length - 1;
   
         try {
-          const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+          const response = await fetch('https://api.ramil.shop/api/chat', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${API_KEY}`,
             },
-            body: JSON.stringify({
-              model: 'gpt-4o-mini',
-              messages: [
-                { role: 'system', content: systemPrompt },
-                ...this.history,
-              ],
-            }),
+            body: JSON.stringify({ message: userMessage }),
           });
   
           const data = await response.json();
-          const botReply = data.choices?.[0]?.message?.content || 'Ошибка: нет ответа от API.';
+          console.log('Ответ от сервера:', data);
   
-          this.$set(this.messages, typingIndex, {
-            user: 'Ассистент Рамиля',
-            text: botReply,
-          });
+          if (data.reply) {
+            this.$set(this.messages, typingIndex, {
+              user: 'Ассистент',
+              text: data.reply,
+            });
   
-          this.history.push({ role: 'assistant', content: botReply });
+            this.history.push({ role: 'model', parts: [{ text: data.reply }] });
+          } else {
+            this.$set(this.messages, typingIndex, {
+              user: 'Ассистент',
+              text: 'Ошибка: ответ от сервера отсутствует.',
+            });
+          }
   
           this.$nextTick(() => {
             const container = this.$refs.messagesContainer;
             container.scrollTop = container.scrollHeight;
           });
         } catch (error) {
-          console.error('Ошибка при вызове API:', error);
+          console.error('Ошибка обращения к backend API:', error);
           this.$set(this.messages, typingIndex, {
-            user: 'Ассистент Рамиля',
-            text: 'Произошла ошибка при обращении к API.',
+            user: 'Ассистент',
+            text: 'Произошла ошибка при обращении к серверу.',
           });
         }
       },
     },
   };
   </script>
+  
   
   <style scoped>
   .chat-container {
