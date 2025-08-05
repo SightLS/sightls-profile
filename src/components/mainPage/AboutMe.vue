@@ -73,12 +73,17 @@
         :aria-label="'Go to page ' + (index + 1)"
       ></button>
     </div>
+    <transitionComponent/>
   </section>
 </template>
 
 <script>
+import transitionComponent from '@/components/mainPage/transitionComponent'
 export default {
   name: 'AboutMe',
+  components: {
+    transitionComponent
+  },
   data() {
     return {
       currentPage: 0,
