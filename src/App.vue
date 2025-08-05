@@ -55,6 +55,10 @@ dl, dd {
   padding: 0;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 ul[class],
 ol[class] {
   list-style: none;
