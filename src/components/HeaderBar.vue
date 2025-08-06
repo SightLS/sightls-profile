@@ -55,7 +55,7 @@ export default {
       });
     },
     scrollToAbout() {
-      const Projects = document.querySelector('.about');
+      const Projects = document.querySelector('.about-me');
       Projects.scrollIntoView({
         block: 'nearest',
         behavior: 'smooth'
