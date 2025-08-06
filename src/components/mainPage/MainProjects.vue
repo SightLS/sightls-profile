@@ -3,13 +3,17 @@
     <div class="container">
       <h1>Projects</h1>
       <div class="projects__list">
-        <router-link to="/expenses" class="projects__item">
+        <router-link to="/fighting" class="projects__item">
             <img src="../../assets/projectsPageImages/expenses.png" alt="">
-            <p>Расход денежных затрат</p>
+            <p>демоверсия игры, которую я хочу выпустить</p>
         </router-link>
         <router-link to="/checkers-info" class="projects__item">
           <img src="../../assets/projectsPageImages/checkers.jpg" alt="">
           <p>Шашки сделанные на vue.js</p>
+        </router-link>
+        <router-link to="/expenses" class="projects__item">
+            <img src="../../assets/projectsPageImages/expenses.png" alt="">
+            <p>Расход денежных затрат</p>
         </router-link>
         <a href="https://github.com/SightLS?tab=repositories" target="_blank" class="projects__item projects__last">
           <img src="../../assets/projectsPageImages/git.jpg" alt="">

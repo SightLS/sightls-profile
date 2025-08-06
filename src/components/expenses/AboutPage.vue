@@ -1,13 +1,21 @@
 <template>
-  <div>
-    <p>К сожалению, БД, которое я делал в 2021 на superbase пропало. Сейчас все заполненно рандомными данными прямо на фронте, но тут осталось классное модальное окно. В данном приложение я использовал vue-router, vuex, так же написал отдельный плагин
-    для модального окна и создал кастомную дерикторию для реализации v-click-outside.</p>
+  <div> <!-- Это теперь единственный корневой элемент -->
+    <div class="about">
+      <p>К сожалению, БД, которое я делал в 2021 на superbase пропало...</p>
+    </div>
+    
+    <FightMain/>
   </div>
 </template>
 
 <script>
+
+import FightMain from '../fighting/FightMain.vue';
 export default {
-  name: 'AboutPage'
+  name: 'AboutPage',
+  components: {
+    FightMain
+  }
 }
 </script>
 

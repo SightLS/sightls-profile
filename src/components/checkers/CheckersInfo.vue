@@ -29,23 +29,27 @@ export default {
 
 <style scoped lang="scss">
 button {
-  position: relative;
-  bottom: -100px;
-  margin-bottom: 200px;
-  border: 1px solid rgb(255, 46, 65);;
-  padding: 15px;
   background-color: rgb(255, 46, 65);
-  border-radius: 10px;
-  height: 60px;
-  color: aliceblue;
+  color: #fff;
+  border: none;
+  padding: 0.75em 1.5em;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(255, 46, 65, 0.3);
 }
 
 button:hover {
-  cursor: pointer;
+  background-color: rgb(230, 40, 58);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 46, 65, 0.4);
 }
 
-a {
-  position: relative;
-  bottom: -20px;
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(255, 46, 65, 0.3);
 }
+
 </style>
