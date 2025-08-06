@@ -114,7 +114,7 @@
     max-height: 500px;
     background-color: #121212;
     border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 15px rgb(255, 46, 65);
     display: flex;
     flex-direction: column;
     overflow: hidden;

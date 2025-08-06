@@ -18,8 +18,7 @@
             Хорошо ориентируюсь в системах Linux (Debian, Ubuntu, Kali).
             <br><br>
             Постоянно развиваюсь и прокачиваю инженерный подход: оптимизирую архитектуру, думаю о производительности и удобстве поддержки кода.
-            Уверенно работаю в команде, активно участвую в код-ревью, умею оценивать сроки задач и не боюсь сложных технических вызовов.
-            <br><br>
+            Уверенно работаю в команде, готов активно участвовать в код-ревью, умею оценивать сроки задач и не боюсь сложных технических вызовов.
           </p>
         </div>
 
@@ -114,18 +113,21 @@ export default {
         "Командная работа, участие в код-ревью, оценка сроков"
       ],
       technologies: [
-        "Vue.js 2 / 3, Composition API, Vuex / Pinia, Vue Router",
+        "Vue.js 2 / 3, Composition API, Vuex, Vue Router",
         "TypeScript, JavaScript (ES6+)",
-        "Node.js, Express",
+        "Ajax",
+        "JSON",
+        "Node.js",
+        "Express",
         "Docker, Docker Compose",
-        "PM2 (менеджер процессов)",
+        "PM2",
         "Nginx (reverse proxy, SSL, проксирование)",
         "SSL/TLS сертификаты (HTTPS)",
         "Linux (Debian, Ubuntu, Kali)",
         "HTML5, CSS3, SCSS/SASS",
         "Webpack, Vite",
         "Vuetify, Bootstrap",
-        "Git, GitHub, Git Flow",
+        "Git, GitHub, GitLab",
         "REST API, WebSocket"
       ]
     }
@@ -174,9 +176,8 @@ export default {
 
 .page {
   padding: 1rem;
-  position: absolute;
   width: 100%;
-  top: 400px;
+  min-height: 800px;
 }
 
 .nav-arrow {
@@ -313,7 +314,6 @@ export default {
   font-size: 50px;
 }
 
-/* Новая анимация pop-slide */
 .pop-slide-enter-active,
 .pop-slide-leave-active {
   transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
