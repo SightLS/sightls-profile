@@ -203,28 +203,35 @@ export default {
   methods: {
     /** === Key controls === **/
     handleKeyDown(event) {
-      switch (event.key.toLowerCase()) {
-        case 'a': this.startMovement(0, -1); break;
-        case 'd': this.startMovement(0, 1); break;
-        case 'w': this.initiateJump(0); break;
-        case ' ': this.initiateAttack(0); break;
-        case 'e': this.initiateUppercut(0); break;
-        case 'q': this.initiateThrow(0); break;
-        case 's': this.initateBlock(0); break;
-        case 'arrowleft': this.startMovement(1, -1); break;
-        case 'arrowright': this.startMovement(1, 1); break;
-        case 'arrowup': this.initiateJump(1); break;
-        case 'enter': this.initiateAttack(1); break;
-        case 'control': this.initiateUppercut(1); break;
-        case 'shift': this.initiateThrow(1); break;
-        case 'arrowdown': this.initateBlock(1); break;
+      switch (event.code) {
+        case 'KeyA': this.startMovement(0, -1); break;
+        case 'KeyD': this.startMovement(0, 1); break;
+        case 'KeyW': this.initiateJump(0); break;
+        case 'Space': this.initiateAttack(0); break;
+        case 'KeyE': this.initiateUppercut(0); break;
+        case 'KeyQ': this.initiateThrow(0); break;
+        case 'KeyS': this.initateBlock(0); break;
+        case 'ArrowLeft': this.startMovement(1, -1); break;
+        case 'ArrowRight': this.startMovement(1, 1); break;
+        case 'ArrowUp': this.initiateJump(1); break;
+        case 'Enter': this.initiateAttack(1); break;
+        case 'ControlLeft': this.initiateUppercut(1); break;
+        case 'ShiftLeft': this.initiateThrow(1); break;
+        case 'ArrowDown': this.initateBlock(1); break;
       }
     },
     
     handleKeyUp(event) {
-      const key = event.key.toLowerCase();
-      if (key === 'a' || key === 'd') this.stopMovement(0);
-      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') this.stopMovement(1);
+      switch (event.code) {
+        case 'KeyA':
+        case 'KeyD':
+          this.stopMovement(0);
+          break;
+        case 'ArrowLeft':
+        case 'ArrowRight':
+          this.stopMovement(1);
+          break;
+      }
     },
     
     // Start movement

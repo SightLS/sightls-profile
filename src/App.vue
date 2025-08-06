@@ -64,6 +64,9 @@ ul[class],
 ol[class] {
   list-style: none;
 }
+ol, ul {
+	list-style: none;
+}
 html {
   height: 100%;
   cursor: default !important;
