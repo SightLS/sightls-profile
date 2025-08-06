@@ -196,17 +196,15 @@ export default {
   z-index: 3;
   
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: scale(1.1);
+    transform: scale(1.6);
   }
   
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
   }
 
   &:active {
-    transform: scale(0.95);
+    transform: scale(1.2);
     transition: transform 0.1s;
   }
 }
