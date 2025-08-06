@@ -5,7 +5,7 @@
       Написаны чисто на js и vue, сторонних библеотек, кроме howler, нет.<br>
       Если желаете попробовать поиграть, нажмите "играть"(игра запуститься прямо в этом окне).</p>
     <a href="https://github.com/SightLS/vue_checkers" target="_blank">Репозитрий на github.</a><br>
-    <button @click="show = !show"><h2>{{ play }}</h2></button>
+    <button @click="show = !show">{{ play }}</button>
     <BoardCheckers v-if="show"/>
   </div>
 </template>
@@ -29,6 +29,7 @@ export default {
 
 <style scoped lang="scss">
 button {
+  margin-top: 2rem;
   background-color: rgb(255, 46, 65);
   color: #fff;
   border: none;

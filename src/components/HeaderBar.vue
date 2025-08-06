@@ -1,27 +1,27 @@
 <template>
-  <header>
-    <div class="container header">
+  <header :class="['fixed-header', { 'scrolled': isScrolled }]">
+    <div class="container header-container">
       <div class="logo-container">
         <router-link to="/">
           <img src="../assets/sightls-logo.png" alt="SightLS" class="logo-sightls">
         </router-link>
       </div>
       <nav class="primary-links">
-        <router-link @click.native="scrollToAbout" to="/">Обо мне</router-link>
-        <router-link @click.native="scrollToProject" to="/">Проекты</router-link>
-        <router-link @click.native="scrollToContacts" to="/">Контакты</router-link>
+        <router-link @click.native="scrollToAbout" to="/" class="nav-link">Обо мне</router-link>
+        <router-link @click.native="scrollToProject" to="/" class="nav-link">Проекты</router-link>
+        <router-link @click.native="scrollToContacts" to="/" class="nav-link">Контакты</router-link>
       </nav>
       <nav class="secondary-links">
-        <a href="https://github.com/SightLS" target="_blank">
+        <a href="https://github.com/SightLS" target="_blank" class="social-link">
           <img class="logo" src="../assets/GitHub-logo.png" alt="GitHub">
         </a>
-        <a href="https://t.me/SightLS" target="_blank">
+        <a href="https://t.me/SightLS" target="_blank" class="social-link">
           <img class="logo" src="../assets/telegram.png" alt="Telegram">
         </a>
-        <a href="https://vk.com/sightls" target="_blank">
+        <a href="https://vk.com/sightls" target="_blank" class="social-link">
           <img class="logo" src="../assets/VK_Logo.png" alt="VK">
         </a>
-        <a href="https://discordapp.com/users/363734265239961602/" target="_blank">
+        <a href="https://discordapp.com/users/363734265239961602/" target="_blank" class="social-link">
           <img class="logo" src="../assets/Discord-Logo-White.png" alt="Discord">
         </a>
       </nav>
@@ -32,98 +32,168 @@
 <script>
 export default {
   name: 'HeaderBar',
+  data() {
+    return {
+      isScrolled: false
+    };
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
   methods: {
-    scrollToProject () {
-      const Projects = document.querySelector('.projects')
-      Projects.scrollIntoView({
-        block: 'nearest',
-        behavior: 'smooth'
-      })
+    handleScroll() {
+      this.isScrolled = window.scrollY > 50;
     },
-    scrollToAbout () {
-      const Projects = document.querySelector('.about')
+    scrollToProject() {
+      const Projects = document.querySelector('.projects');
       Projects.scrollIntoView({
         block: 'nearest',
         behavior: 'smooth'
-      })
+      });
     },
-    scrollToContacts () {
-      const Projects = document.querySelector('.contacts')
+    scrollToAbout() {
+      const Projects = document.querySelector('.about');
       Projects.scrollIntoView({
         block: 'nearest',
         behavior: 'smooth'
-      })
+      });
+    },
+    scrollToContacts() {
+      const Projects = document.querySelector('.contacts');
+      Projects.scrollIntoView({
+        block: 'nearest',
+        behavior: 'smooth'
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-.header {
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 115px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 46, 65, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: height 0.4s ease, background-color 0.4s ease;
+
+  &.scrolled {
+    height: 70px;
+    background-color: rgba(255, 46, 65, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.header-container {
+  width: 100%;
+  max-width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-header {
-  margin-bottom: 40px;
-  display: flex;
-  backdrop-filter: blur(30px);
-  height: 115px;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(255, 46, 65);
+  padding: 0 20px;
 }
 
 .logo-sightls {
   max-height: 50px;
-}
+  transition: max-height 0.4s ease;
 
-.logo-container {
-  margin: 0;
+  .scrolled & {
+    max-height: 35px;
+  }
 }
 
 .primary-links {
   display: flex;
-  gap: 10px;
-  width: 300px;
+  gap: 30px;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  position: relative;
+  transition: font-size 0.4s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    transition: width 0.3s ease;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+
+  .scrolled & {
+    font-size: 16px;
+  }
 }
 
 .secondary-links {
-  @extend .primary-links;
-  gap: 40px;
+  display: flex;
+  gap: 20px;
+}
+
+.social-link {
+  opacity: 0.8;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
 }
 
 .logo {
   max-width: 40px;
+  transition: max-width 0.4s ease;
+
+  .scrolled & {
+    max-width: 30px;
+  }
 }
+
 @media (max-width: 420px) {
-  header {
-    margin-bottom: 40px;
-    display: flex;
-    height: 115px;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(255, 46, 65);
+  .fixed-header {
+    height: 70px;
   }
 
   .logo-sightls {
-display: none;
+    display: none;
   }
 
   .primary-links {
-    display: flex;
-    gap: 10px;
-    width: 300px;
+    width: auto;
+    gap: 15px;
+    
+    .nav-link {
+      font-size: 16px;
+    }
   }
 
   .secondary-links {
     display: none;
   }
-
-  .logo {
-    max-width: 40px;
+  
+  .header-container {
+    justify-content: center;
+    padding: 0 10px;
   }
 }
-
 </style>

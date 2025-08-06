@@ -1,15 +1,14 @@
 <template>
     <div class="container game-page">
-      <!-- Кнопки управления -->
       <div class="button-group" v-if="showMain">
         <button @click="showMain = false">Вернуться к описанию</button>
         <button @click="restartGame">Перезапустить</button>
       </div>
   
       <FightingAbout v-if="!showMain" />
+      
       <button v-if="!showMain" @click="showMain = true">Играть</button>
   
-      <!-- Компонент игры с ключом -->
       <FightingMain v-if="showMain" :key="gameKey" />
     </div>
   </template>
@@ -27,14 +26,34 @@
     data() {
       return {
         showMain: false,
-        gameKey: 0 // ключ для "перезапуска" компонента
+        gameKey: 0
       }
     },
     methods: {
       restartGame() {
-        // Изменение ключа заставит Vue пересоздать компонент
         this.gameKey += 1;
+      },
+      // отключаем стандартное поведение клавиш
+      disableScroll(e) {
+        if (this.showMain) {
+          const keysToPrevent = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '];
+          if (keysToPrevent.includes(e.key)) {
+            e.preventDefault();
+          }
+        }
+      },
+      addKeyListener() {
+        window.addEventListener('keydown', this.disableScroll);
+      },
+      removeKeyListener() {
+        window.removeEventListener('keydown', this.disableScroll);
       }
+    },
+    mounted() {
+      this.addKeyListener();
+    },
+    beforeDestroy() {
+      this.removeKeyListener();
     }
   }
   </script>
@@ -45,6 +64,7 @@
   }
   
   button {
+    margin-top: 2rem;
     background-color: rgb(255, 46, 65);
     color: #fff;
     border: none;
@@ -75,4 +95,3 @@
     margin-bottom: 1em;
   }
   </style>
-  

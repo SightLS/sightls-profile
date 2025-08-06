@@ -34,9 +34,14 @@
     data() {
       return {
         input: '',
-        messages: [],
+        messages: [
+        {
+          user: 'Рамиль',
+          text: 'Это мой ИИ-ассистент, созданный на базе Gemini 2.5 Flash-Lite. Он может ответить на ваши вопросы обо мне',
+        },
+        ],
         history: [],
-        isMinimized: true,
+        isMinimized: false,
       };
     },
     methods: {

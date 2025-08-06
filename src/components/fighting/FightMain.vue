@@ -63,11 +63,7 @@
 
 
 <script>
-// Import backgrounds
-import sky from '@/assets/backgrounds/sky.png';
 
-// Import sprites
-import staySprite from '@/assets/sonya/stay.png';
 import blockSprite from '@/assets/sonya/block.png';
 import preThrowSprite from '@/assets/sonya/pre-throw.png';
 import throwSprite from '@/assets/sonya/thwrow.png';
@@ -133,7 +129,7 @@ export default {
       players: [
         {
           bodyLeft: 200, 
-          bodyBottom: 80, // FLOOR_HEIGHT
+          bodyBottom: 80, 
           movementSpeed: 2, 
           facingLeft: false, 
           movementDirection: 0,
@@ -160,7 +156,7 @@ export default {
         },
         {
           bodyLeft: 600, 
-          bodyBottom: 80, // FLOOR_HEIGHT
+          bodyBottom: 80, 
           movementSpeed: 2, 
           facingLeft: true, 
           movementDirection: 0,
@@ -549,7 +545,7 @@ export default {
     
     // Update ball positions
     updateEnergyBalls() {
-      const stepSize = 2; // Step size for collision detection
+      const stepSize = 2;
       const updatedBalls = [];
 
       for (const ball of this.balls) {
@@ -740,24 +736,14 @@ export default {
   width: 1000px;
   height: 600px;
   background-color: #050510;
-
-  /* Новый улучшенный фон: многослойный киберпанк градиент с динамикой */
   background-image:
-    /* Глубокий фиолетово-синий градиент для атмосферы */
     radial-gradient(circle at 25% 30%, #6a00ffcc, transparent 70%),
     radial-gradient(circle at 75% 70%, #00fffacc, transparent 60%),
-
-    /* Мягкие волны света */
     repeating-radial-gradient(circle at 50% 50%, #33006610 0 10px, transparent 10px 20px),
-
-    /* Цифровая сетка — вертикальные и горизонтальные линии */
     repeating-linear-gradient(to right, rgba(255, 0, 255, 0.08) 0 2px, transparent 2px 12px),
     repeating-linear-gradient(to bottom, rgba(0, 255, 255, 0.07) 0 2px, transparent 2px 12px),
-
-    /* Абстрактные лучи света (от центра вниз) */
     linear-gradient(180deg, rgba(106, 0, 255, 0.2) 0%, transparent 80%),
 
-    /* Тонкие искрящиеся линии */
     repeating-linear-gradient(
       45deg,
       rgba(255, 0, 255, 0.1),
@@ -776,7 +762,6 @@ export default {
   overflow: hidden;
 }
 
-/* Киберпанк здания — слегка изменены для плавности и света */
 .cyber-buildings {
   position: absolute;
   bottom: 35%;
@@ -798,7 +783,6 @@ export default {
   top: 0; left: 0;
   width: 100%; height: 100%;
   background:
-    /* Окна с эффектом мерцания (анимация) */
     linear-gradient(45deg, transparent 48%, #00f0ffcc 48%, #00f0ffcc 52%, transparent 52%),
     linear-gradient(-45deg, transparent 48%, #00f0ffcc 48%, #00f0ffcc 52%, transparent 52%),
     linear-gradient(45deg, transparent 83%, #ff33ccaa 83%, #ff33ccaa 87%, transparent 87%),
@@ -815,7 +799,6 @@ export default {
   50% { opacity: 0.1; }
 }
 
-/* Киберпанк дорога — более контрастная и с блеском */
 .cyber-road {
   position: absolute;
   bottom: 0;
@@ -850,7 +833,7 @@ export default {
   pointer-events: none;
 }
 
-/* Неоновые вывески — чуть мягче, но с динамикой */
+
 .neon-signs {
   position: absolute;
   top: 20%;
@@ -875,7 +858,7 @@ export default {
   letter-spacing: 0.05em;
 }
 
-/* Анимация мерцания неона */
+
 @keyframes neon-flicker {
   0%, 18%, 22%, 55%, 70%, 100% {
     text-shadow:
@@ -891,7 +874,6 @@ export default {
   }
 }
 
-/* Остальное CSS оставляем без изменений */
 .floor {
   display: none;
 }

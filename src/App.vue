@@ -41,6 +41,7 @@ export default {
 * {
   cursor: none !important;
 }
+
 /* Remove default margin and padding */
 body,
 h1, h2, h3, h4,
@@ -69,11 +70,12 @@ html {
 }
 
 body {
+  padding-top: 115px;
   min-height: 100%;
-  font-family: 'Avenir', 'Helvetica', 'Arial', sans-serif;
+  font-family: 'Inter', sans-serif;
   color: var(--text-color);
   background-color: var(--bg-color);
-  line-height: 1.5;
+  line-height: 1.6; 
 }
 
 #app {
@@ -95,7 +97,30 @@ body {
 }
 
 h1 {
-  margin-bottom: 3.125rem; /* 50px */
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+h2 {
+  font-size: 2rem; 
+  margin-bottom: 1.5rem; 
+  margin-top: 2rem; 
+}
+
+h3 {
+  font-size: 1.5rem; 
+  margin-bottom: 1rem; 
+  margin-top: 1.5rem; 
+}
+
+h4 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem; 
+  margin-top: 1rem; 
+}
+
+p {
+  margin-bottom: 1rem; 
 }
 
 a {
@@ -112,6 +137,7 @@ a {
 }
 .container {
   width: var(--container-width);
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -122,7 +148,6 @@ a {
   }
 }
 
-/* Accessibility improvements */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;

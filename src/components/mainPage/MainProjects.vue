@@ -4,7 +4,7 @@
       <h1>Projects</h1>
       <div class="projects__list">
         <router-link to="/fighting" class="projects__item">
-            <img src="../../assets/projectsPageImages/expenses.png" alt="">
+            <img src="../../assets/projectsPageImages/fighting-preview.png" alt="">
             <p>демоверсия игры, которую я хочу выпустить</p>
         </router-link>
         <router-link to="/checkers-info" class="projects__item">
