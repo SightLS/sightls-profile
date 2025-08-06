@@ -4,21 +4,27 @@
       <button class="nav-arrow" @click="prevPage" :aria-label="'Previous page'">
         <span class="arrow">&#8249;</span>
       </button>
-      
+
       <div class="about-content">
-        <transition name="fade-slide" mode="out-in">
-          <div v-if="currentPage === 0" key="about" class="page about-page">
-            <div class="about-me">
-              <h1 class="section-title">Обо мне</h1>
-              <p class="about-description">
-                Привет! Я Рамиль, фронтенд-разработчик. Мои главные качества:
-                ответственность, адекватное восприятие критики, нацеленность на результат.
-                Люблю решать сложные задачи и быстро обучаюсь новому. Имею военный билет
-                категории В.
-              </p>
-            </div>
-            
-            <div class="skills-container">
+        <div class="about-me">
+          <h1 class="section-title">Обо мне</h1>
+          <p class="about-description">
+            Привет! Я Рамиль, фронтенд-разработчик с уверенными знаниями во frontend и крепкой базой в backend-разработке.
+            Создаю интерактивные интерфейсы, игровые механики, реализую сложную логику на JavaScript и TypeScript, умею интегрировать ИИ в веб-приложения и использовать современные API.
+
+            Уверенно работаю с серверной частью на Node.js и Express, развертываю и настраиваю приложения с помощью Docker, PM2 и Nginx.
+            Имею практический опыт настройки SSL/TLS сертификатов, работы с REST API, а также обеспечения безопасности серверов и клиентов.
+
+            Хорошо ориентируюсь в системах Linux (Debian, Ubuntu, Kali).
+
+            Постоянно развиваюсь и прокачиваю инженерный подход: оптимизирую архитектуру, думаю о производительности и удобстве поддержки кода.
+            Уверенно работаю в команде, активно участвую в код-ревью, умею оценивать сроки задач и не боюсь сложных технических вызовов.
+          </p>
+        </div>
+
+        <transition name="pop-slide" mode="out-in">
+          <div :key="currentPage" ref="pageRef" class="page">
+            <div v-if="currentPage === 0" class="skills-container">
               <div class="skills-column">
                 <h3 class="skills-title">Мои навыки:</h3>
                 <ul class="skills-list">
@@ -27,7 +33,7 @@
                   </li>
                 </ul>
               </div>
-              
+
               <div class="skills-column">
                 <h3 class="skills-title">Технологический стек:</h3>
                 <ul class="skills-list">
@@ -37,33 +43,33 @@
                 </ul>
               </div>
             </div>
-          </div>
-          
-          <div v-else key="education" class="page education-page">
-            <h1 class="section-title">Образование</h1>
-            
-            <div class="education-block">
-              <h2 class="education-type">Неоконченное высшее образование</h2>
-              <h3 class="institution">Астраханский государственный технический университет</h3>
-              <p class="faculty">Институт информационных технологий и коммуникаций</p>
-              <p class="specialty">Специалист по защите информации</p>
-            </div>
-            
-            <div class="education-block">
-              <h2 class="education-type">Среднее специальное образование</h2>
-              <h3 class="institution">Астраханский государственный университет</h3>
-              <p class="faculty">Факультет среднего профессионального образования</p>
-              <p class="specialty">Монтаж, эксплуатация и ремонт электрооборудования промышленных предприятий</p>
+
+            <div v-else class="education-page">
+              <h1 class="section-title">Образование</h1>
+
+              <div class="education-block">
+                <h2 class="education-type">Неоконченное высшее образование</h2>
+                <h3 class="institution">Астраханский государственный технический университет</h3>
+                <p class="faculty">Институт информационных технологий и коммуникаций</p>
+                <p class="specialty">Специалист по защите информации</p>
+              </div>
+
+              <div class="education-block">
+                <h2 class="education-type">Среднее специальное образование</h2>
+                <h3 class="institution">Астраханский государственный университет</h3>
+                <p class="faculty">Факультет среднего профессионального образования</p>
+                <p class="specialty">Монтаж, эксплуатация и ремонт электрооборудования промышленных предприятий</p>
+              </div>
             </div>
           </div>
         </transition>
       </div>
-      
+
       <button class="nav-arrow" @click="nextPage" :aria-label="'Next page'">
         <span class="arrow">&#8250;</span>
       </button>
     </div>
-    
+
     <div class="page-indicators">
       <button 
         v-for="(page, index) in totalPages" 
@@ -73,12 +79,14 @@
         :aria-label="'Go to page ' + (index + 1)"
       ></button>
     </div>
-    <transitionComponent/>
+    
+    <transitionComponent />
   </section>
 </template>
 
 <script>
 import transitionComponent from '@/components/mainPage/transitionComponent'
+
 export default {
   name: 'AboutMe',
   components: {
@@ -89,25 +97,35 @@ export default {
       currentPage: 0,
       totalPages: 2,
       skills: [
-        'Верстка на HTML5, CSS3 (адаптивная, кроссбраузерная, PixelPerfect)',
-        'Создание современной веб-анимации (CSS, JS)',
-        'JavaScript (ES6, ООП)',
-        'Применение паттернов программирования',
-        'Vue 2 (Vuex, Vue Router)',
-        'Анализ и работа с чужим кодом',
-        'Командная работа',
-        'Оценка сроков выполнения задач'
+        "Адаптивная и кроссбраузерная вёрстка (HTML5, CSS3, SCSS/SASS)",
+        "Pixel Perfect, семантика, методология БЭМ",
+        "Создание современной анимации (CSS, JS)",
+        "JavaScript (ES6+), TypeScript, ООП, SOLID",
+        "Разработка SPA на Vue 2 и 3 (Options API и Composition API)",
+        "Проектирование и реализация сложной логики интерфейсов и игр",
+        "Интеграция AI/ML API",
+        "Асинхронность и многопоточность (Web Workers, Node.js потоки)",
+        "Уверенная работа с backend (Node.js, Express)",
+        "Развёртывание и настройка приложений (Docker, Nginx, PM2)",
+        "Работа с SSL/TLS сертификатами (Let's Encrypt, OpenSSL)",
+        "Администрирование Linux-систем (Debian, Ubuntu, Kali)",
+        "Работа с чужим кодом, рефакторинг, планирование задач",
+        "Командная работа, участие в код-ревью, оценка сроков"
       ],
       technologies: [
-        'Vue.js', 
-        'Vuex, Vue Router',
-        'HTML5, CSS3',
-        'SCSS/SASS',
-        'Webpack',
-        'Bootstrap',
-        'Git',
-        'БЭМ',
-        'Vuetify'
+        "Vue.js 2 / 3, Composition API, Vuex / Pinia, Vue Router",
+        "TypeScript, JavaScript (ES6+)",
+        "Node.js, Express",
+        "Docker, Docker Compose",
+        "PM2 (менеджер процессов)",
+        "Nginx (reverse proxy, SSL, проксирование)",
+        "SSL/TLS сертификаты (HTTPS)",
+        "Linux (Debian, Ubuntu, Kali)",
+        "HTML5, CSS3, SCSS/SASS",
+        "Webpack, Vite",
+        "Vuetify, Bootstrap",
+        "Git, GitHub, Git Flow",
+        "REST API, WebSocket"
       ]
     }
   },
@@ -142,13 +160,22 @@ export default {
 
 .about-content {
   flex: 1;
-  min-height: 500px;
+  min-height: 1100px;
   position: relative;
   overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.about-me {
+  position: relative;
+  z-index: 2;
 }
 
 .page {
   padding: 1rem;
+  position: absolute;
+  width: 100%;
+  top: 400px;
 }
 
 .nav-arrow {
@@ -163,15 +190,22 @@ export default {
   font-size: 2rem;
   transition: all 0.3s ease;
   border-radius: 50%;
+  position: relative;
+  z-index: 3;
   
   &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(255, 255, 255, 0.1);
     transform: scale(1.1);
   }
   
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+    transition: transform 0.1s;
   }
 }
 
@@ -219,6 +253,7 @@ export default {
     position: absolute;
     left: 0;
     font-size: 1.2rem;
+    color: #ccc;
   }
 }
 
@@ -255,7 +290,7 @@ export default {
     height: 10px;
     border-radius: 50%;
     border: none;
-    background: #ccc;
+    background: #555;
     margin: 0 5px;
     padding: 0;
     cursor: pointer;
@@ -263,6 +298,7 @@ export default {
     
     &.active {
       transform: scale(1.2);
+      background: #ccc;
     }
     
     &:focus {
@@ -270,23 +306,28 @@ export default {
     }
   }
 }
+
 .arrow{
   color: #fff;
   font-size: 50px;
 }
-.fade-slide-enter-active,
-.fade-slide-leave-active {
-  transition: all 0.4s ease;
+
+/* Новая анимация pop-slide */
+.pop-slide-enter-active,
+.pop-slide-leave-active {
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-.fade-slide-enter-from {
+.pop-slide-enter-from {
   opacity: 0;
-  transform: translateX(30px);
+  transform: translateY(50px) scale(0.9);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.fade-slide-leave-to {
+.pop-slide-leave-to {
   opacity: 0;
-  transform: translateX(-30px);
+  transform: translateY(-50px) scale(0.9);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 768px) {
@@ -302,6 +343,7 @@ export default {
   .about-content {
     order: 1;
     width: 100%;
+    height: 600px
   }
   
   .skills-column {
