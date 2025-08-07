@@ -1,69 +1,61 @@
 <template>
-    <div class="game-screen">
-      <!-- Неоновые здания -->
-      <div class="cyber-buildings"></div>
+  <div class="game-screen">
+    <div class="cyber-buildings"></div>
 
-      <!-- Дорога с неоновой разметкой -->
-      <div class="cyber-road"></div>
+    <div class="cyber-road"></div>
 
-      <!-- Неоновые вывески -->
-      <div class="neon-signs">
-        <div class="neon-sign" style="left: 15%;">夜</div>
-        <div class="neon-sign" style="left: 35%;">未来</div>
-        <div class="neon-sign" style="left: 65%;">サイバー</div>
-        <div class="neon-sign" style="left: 85%;">都市</div>
-      </div>
-
-      <!-- Sword points -->
-      <div
-        v-for="(point, index) in swordPoints"
-        :key="index"
-        class="sword-point"
-        :style="{
-          left: point.x + 'px',
-          bottom: point.y + 'px',
-          backgroundColor: point.color,
-          display: point.visible ? 'block' : 'none'
-        }"
-      ></div>
-
-      <!-- Balls -->
-      <div
-        v-for="(ball, index) in balls"
-        :key="'ball-' + index"
-        class="ball"
-        :style="{
-          left: ball.x + 'px',
-          bottom: ball.y + 'px',
-          backgroundColor: ball.color,
-          display: ball.visible ? 'block' : 'none'
-        }"
-      ></div>
-
-      <!-- Characters -->
-      <div
-        v-for="(player, index) in players"
-        :key="index"
-        class="character"
-        :class="'player' + (index + 1)"
-        :style="{
-          left: player.bodyLeft + 'px',
-          bottom: player.bodyBottom + 'px',
-          transform: getCharacterTransform(index),
-          filter: player.isRed ? 'hue-rotate(0deg) brightness(1.5) saturate(5)' : 'none',
-          backgroundImage: getCharacterSprite(index),
-          width: getCharacterWidth(index) + 'px',
-          height: getCharacterHeight(index) + 'px'
-        }"
-      ></div>
-
-      <div class="floor"></div>
+    <div class="neon-signs">
+      <div class="neon-sign" style="left: 15%;">夜</div>
+      <div class="neon-sign" style="left: 35%;">未来</div>
+      <div class="neon-sign" style="left: 65%;">サイバー</div>
+      <div class="neon-sign" style="left: 85%;">都市</div>
     </div>
+
+    <div
+      v-for="(point, index) in swordPoints"
+      :key="index"
+      class="sword-point"
+      :style="{
+        left: point.x + 'px',
+        bottom: point.y + 'px',
+        backgroundColor: point.color,
+        display: point.visible ? 'block' : 'none'
+      }"
+    ></div>
+
+    <div
+      v-for="(ball, index) in balls"
+      :key="'ball-' + index"
+      class="ball"
+      :style="{
+        left: ball.x + 'px',
+        bottom: ball.y + 'px',
+        backgroundColor: ball.color,
+        display: ball.visible ? 'block' : 'none'
+      }"
+    ></div>
+
+    <div
+      v-for="(player, index) in players"
+      :key="index"
+      class="character"
+      :class="'player' + (index + 1)"
+      :style="{
+        left: player.bodyLeft + 'px',
+        bottom: player.bodyBottom + 'px',
+        transform: getCharacterTransform(index),
+        filter: player.isRed ? 'hue-rotate(0deg) brightness(1.5) saturate(5)' : 'none',
+        backgroundImage: getCharacterSprite(index),
+        width: getCharacterWidth(index) + 'px',
+        height: getCharacterHeight(index) + 'px'
+      }"
+    ></div>
+
+    <div class="floor"></div>
+  </div>
 </template>
 
-
 <script>
-
 import blockSprite from '@/assets/sonya/block.png';
 import preThrowSprite from '@/assets/sonya/pre-throw.png';
 import throwSprite from '@/assets/sonya/thwrow.png';
@@ -186,12 +178,19 @@ export default {
       swordPoints: [],
       balls: [],
       lastTimestamp: 0,
-      animationFrameId: null
+      animationFrameId: null,
+      
+      // Add sprite cache to data
+      spriteCache: {}
     };
   },
   mounted() {
     window.addEventListener('keydown', this.handleKeyDown);
     window.addEventListener('keyup', this.handleKeyUp);
+    
+    // Preload all sprites before starting the game loop
+    this.preloadImages();
+    
     this.lastTimestamp = performance.now();
     this.gameLoop();
   },
@@ -250,7 +249,7 @@ export default {
     canPerformAction(playerIndex) {
       const player = this.players[playerIndex];
       return !player.isDead && !player.isStunned && !player.isAttacking && 
-            !player.isUppercutting && !player.isBlocking && !player.isThrowing;
+             !player.isUppercutting && !player.isBlocking && !player.isThrowing;
     },
     
     initiateJump(playerIndex) {
@@ -455,7 +454,7 @@ export default {
           player.currentStayFrame = Math.min(Math.floor(progress * frameCount), frameCount - 1);
         } else {
           const reverseProgress = (cycleTime - this.STAY_ANIMATION_FORWARD_DURATION) / 
-                                (this.STAY_ANIMATION_DURATION - this.STAY_ANIMATION_FORWARD_DURATION);
+                                  (this.STAY_ANIMATION_DURATION - this.STAY_ANIMATION_FORWARD_DURATION);
           player.currentStayFrame = frameCount - 2 - Math.floor(reverseProgress * (frameCount - 2));
         }
         
@@ -463,15 +462,15 @@ export default {
         player.lastStayAnimationUpdate = now;
       }
       
-      return `url(${this.STAY_SPRITES[player.currentStayFrame]})`;
+      return `url(${this.spriteCache[this.STAY_SPRITES[player.currentStayFrame]].src})`;
     },
     
     // Get character sprite
     getCharacterSprite(playerIndex) {
       const player = this.players[playerIndex];
       
-      if (player.isDead) return `url(${this.STAY_SPRITES[0]})`;
-      if (player.isStunned) return `url(${this.STAY_SPRITES[0]})`;
+      if (player.isDead) return `url(${this.spriteCache[this.STAY_SPRITES[0]].src})`;
+      if (player.isStunned) return `url(${this.spriteCache[this.STAY_SPRITES[0]].src})`;
       if (player.isAttacking) {
         const frameCount = this.ATTACK_SPRITES.length;
         const progressFraction = Math.min(player.attackProgress / this.ATTACK_DURATION, 1);
@@ -479,12 +478,13 @@ export default {
           Math.floor(progressFraction * frameCount), 
           frameCount - 1
         );
-        return `url(${this.ATTACK_SPRITES[frameIndex]})`;
+        return `url(${this.spriteCache[this.ATTACK_SPRITES[frameIndex]].src})`;
       }
-      if (player.isUppercutting) return `url(${upperAttackSprite})`;
-      if (player.isBlocking) return `url(${blockSprite})`;
+      if (player.isUppercutting) return `url(${this.spriteCache[upperAttackSprite].src})`;
+      if (player.isBlocking) return `url(${this.spriteCache[blockSprite].src})`;
       if (player.isThrowing) {
-        return player.throwDelay > 0 ? `url(${preThrowSprite})` : `url(${throwSprite})`;
+        const sprite = player.throwDelay > 0 ? preThrowSprite : throwSprite;
+        return `url(${this.spriteCache[sprite].src})`;
       }
       
       // Use new stay animation
@@ -697,7 +697,7 @@ export default {
       const player = this.players[playerIndex];
       const left = player.bodyLeft, bottom = player.bodyBottom;
       const bodyCollision = x >= left - radius && x <= left + this.SPRITE_WIDTH + radius && 
-                          y >= bottom - radius && y <= bottom + this.SPRITE_HEIGHT + radius;
+                           y >= bottom - radius && y <= bottom + this.SPRITE_HEIGHT + radius;
       return bodyCollision;
     },
     
@@ -722,6 +722,21 @@ export default {
       player.isBlocking = false;
       player.isThrowing = false;
       player.movementDirection = 0;
+    },
+
+    // New method for preloading images
+    preloadImages() {
+      const sprites = [
+        blockSprite, preThrowSprite, throwSprite, upperAttackSprite,
+        ...this.ATTACK_SPRITES,
+        ...this.STAY_SPRITES,
+      ];
+      
+      sprites.forEach(spriteUrl => {
+        const img = new Image();
+        img.src = spriteUrl;
+        this.spriteCache[spriteUrl] = img;
+      });
     }
   }
 };
@@ -732,7 +747,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #000010; /* Общий фон страницы */
+  background: #000010;
   height: 100vh;
   margin: 0;
   padding: 0;
