@@ -215,7 +215,7 @@ export default {
         case 'ArrowUp': this.initiateJump(1); break;
         case 'Enter': this.initiateAttack(1); break;
         case 'ControlLeft': this.initiateUppercut(1); break;
-        case 'ShiftLeft': this.initiateThrow(1); break;
+        case 'ShiftRight': this.initiateThrow(1); break;
         case 'ArrowDown': this.initateBlock(1); break;
       }
     },
